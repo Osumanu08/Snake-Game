@@ -40,10 +40,6 @@ while game_is_on:
     # Detect collision with walls
     if snake.head.xcor() > 280 or snake.head.xcor() < -280 or snake.head.ycor() > 245 or snake.head.ycor() < -280:
         game_is_on = False       # End game
-        print(snake.head.xcor() > 290)
-        print(snake.head.xcor() < -290)
-        print(snake.head.ycor() > 245)
-        print(snake.head.ycor() < -290)
         scoreboard.game_over()   # Display game over message
 
     # Detect collision with tail
