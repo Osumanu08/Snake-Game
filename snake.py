@@ -22,6 +22,7 @@ class Snake:
         """Create initial snake body"""
         for position in STARTING_POSITION:
             self.add_segment(position)
+
             
     def add_segment(self, position):
         """Add new body segment"""
@@ -30,10 +31,20 @@ class Snake:
         new_segment.penup()
         new_segment.goto(position)
         self.segments.append(new_segment)
-            
+
+    def reset(self):
+        """Reset the segment"""
+        for seg in self.segments:  # Clear the previous segment 
+            seg.goto(1000, 1000)
+        self.segments.clear()
+        self.create_snake()
+        self.head = self.segments[0]
+
+
     def extend(self):
         """Add new segment when food is eaten"""
         self.add_segment(self.segments[-1].position())
+
         
     def move(self):
         """Move snake forward continuously"""
