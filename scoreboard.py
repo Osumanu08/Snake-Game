@@ -10,6 +10,9 @@ class ScoreBoard(Turtle):
     def __init__(self):
         super().__init__()
         self.score = 0
+        with open("Day 20 Snake\data.txt", mode="r") as data:
+            self.high_score = int(data.read())
+            
         self.color("white")
         self.penup()
         self.goto(0, 250)  # Position score at top center
@@ -18,17 +21,26 @@ class ScoreBoard(Turtle):
     
     def update_scoreboard(self):
         """Refresh the displayed score"""
-        self.write(f"Score:{self.score}", align=ALIGNMENT, font=FONT)
+        self.clear()
+        self.write(f"Score:{self.score} High Score: {self.high_score}", align=ALIGNMENT, font=FONT)
     
-    def game_over(self):
-        """Display game over message"""
-        self.goto(0, 0)
-        self.write("GAME OVER", align=ALIGNMENT, font=FONT)
+    def reset(self):
+        if self.score > self.high_score:
+            self.high_score = self.score
+            with open("Day 20 Snake\data.txt", mode="w") as data:
+                data.write(f"{self.high_score}")
+        
+        self.score = 0
+        self.update_scoreboard()
+    
+    # def game_over(self):
+    #     """Display game over message"""
+    #     self.goto(0, 0)
+    #     self.write("GAME OVER", align=ALIGNMENT, font=FONT)
 
     def increase_score(self):
         """Increment score and update display"""
         self.score += 1
-        self.clear()
         self.update_scoreboard()
 
 
